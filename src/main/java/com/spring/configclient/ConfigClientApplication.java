@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class ConfigClientApplication {
-
-	@Value("${msg:Config Server is not working. Please check...}")
-	private String msg;
 	
-	@Value("${appName:Config Server is not working. Please check...}")
+	@Value("${appEnvName:Config Server is not working. Please check...}")
 	private String name;
+	
+	@Value("${name: Server is not working. Please check...}")
+	private String defaultName;
+	
+	@Value("${configClientName: Server is not working. Please check...}")
+	private String configClientName;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigClientApplication.class, args);
 	}
 
-	@GetMapping("/msg")
-	public String getMsg() {
-		return this.msg;
-	}
-	
+		
 	@GetMapping("/check/property")
 	public String getName() {
-		return "Hello Viewers, You are using Environemnt - " + this.name;
+		return "Hello Viewers, <br/><br/> You are using Application <b>- " + this.name + " </b><br/><br/> default config-client application properties which is stored at config-client root level is - <b>"+ this.configClientName +"</b><br/><br/> default application properties which is stored at root level is - <b>"+ this.defaultName;
 	}
 }
